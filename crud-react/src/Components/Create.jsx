@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Create = () => {
   const [name, setName] = useState("create");
   const [email, setEmail] = useState("");
-  const header = { "Access-Conterol-Allow-Origin": "*" };
+  const header = { "Access-Control-Allow-Origin": "*" };
   const history = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
