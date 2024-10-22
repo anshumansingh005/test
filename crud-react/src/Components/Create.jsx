@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 
 const Create = () => {
@@ -11,12 +12,15 @@ const Create = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Clicked");
-    axios.post("https://66c741f8732bf1b79fa5eff3.mockapi.io/crud-youtube", {
-      name: name,
-      email: email,
-      header,
-    });
-    history("/allBooking");
+    axios
+      .post("https://66c741f8732bf1b79fa5eff3.mockapi.io/crud-youtube", {
+        name: name,
+        email: email,
+        header,
+      })
+      .then(() => {
+        history("/allBooking");
+      });
   };
   return (
     <>

@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import AllBooking from "./Components/AllBooking.jsx";
+import Update from "./Components/Update.jsx";
 import "./index.css";
 const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: "/allBooking",
     element: <AllBooking />,
+  },
+  {
+    path: "/update",
+    element: <Update />,
   },
 ]);
 

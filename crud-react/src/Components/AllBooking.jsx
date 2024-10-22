@@ -1,17 +1,24 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { Button, Table } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import Button from "react-bootstrap/Button";
+import Table from "react-bootstrap/Table";
 const AllBooking = () => {
+  const url = "https://66c741f8732bf1b79fa5eff3.mockapi.io/crud-youtube";
   const [data, setData] = useState([]);
-  const getData = () => {
-    axios
-      .get("https://66c741f8732bf1b79fa5eff3.mockapi.io/crud-youtube")
-      .then((res) => {
-        setData(res.data);
-      });
-  };
-  getData();
 
+  const getData = () => {
+    axios.get(url).then((res) => {
+      setData(res.data);
+      console.log(res.data);
+    });
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const handleDelete = (id) => {
+    axios.delete(url + `/${id}`).then(() => getData());
+  };
   return (
     <div>
       <h2>See all the bookings</h2>
@@ -25,19 +32,32 @@ const AllBooking = () => {
             <th></th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto@gmail.com</td>
-            <td>
-              <Button variant="warning">Edit</Button>
-            </td>
-            <td>
-              <Button variant="danger">Delete</Button>
-            </td>
-          </tr>
-        </tbody>
+        {data.map((eachData) => {
+          return (
+            <>
+              <tbody>
+                <tr>
+                  <td>{eachData.id}</td>
+                  <td>{eachData.name}</td>
+                  <td>{eachData.email}</td>
+                  <td>
+                    <Button variant="warning">Edit</Button>
+                  </td>
+                  <td>
+                    <Button
+                      variant="danger"
+                      onClick={() => {
+                        handleDelete(eachData.id);
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </td>
+                </tr>
+              </tbody>
+            </>
+          );
+        })}
       </Table>
     </div>
   );
